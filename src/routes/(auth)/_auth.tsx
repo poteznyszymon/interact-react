@@ -19,11 +19,11 @@ function RouteComponent() {
     <main className="h-screen bg-background flex items-center justify-center">
       <Button
         size={"icon-sm"}
-        variant={"outline"}
-        className="absolute top-6 right-6 overflow-hidden"
+        variant={"secondary"}
+        className="absolute top-6 right-6 overflow-hidden border"
         onClick={() => changeTheme()}
       >
-        <div className="relative w-4 h-4">
+        <div className="relative w-4 h-4 z-20">
           <Sun
             className={`absolute inset-0 transition-all duration-300 ${theme === "dark" ? "opacity-100 rotate-0" : "opacity-0 rotate-90"}`}
           />

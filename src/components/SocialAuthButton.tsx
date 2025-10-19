@@ -1,6 +1,6 @@
 const SocialAuthButton = () => {
   return (
-    <button className="h-8 px-3 py-1 shadow-xs border-input border dark:bg-input/30 rounded-md text-sm cursor-pointer hover:bg-secondary dark:hover:bg-secondary relative">
+    <button className="h-8 px-3 py-1 shadow-xs border-input border dark:bg-input/30 rounded-md text-sm cursor-pointer hover:bg-secondary dark:hover:bg-secondary relative select-none">
       <svg
         aria-hidden="true"
         role="graphics-symbol"

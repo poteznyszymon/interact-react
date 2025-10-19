@@ -17,6 +17,7 @@ import {
 import LoadingButton from "@/components/LoadingButton";
 import { useState } from "react";
 import SocialAuthButton from "@/components/SocialAuthButton";
+import PasswordInput from "@/components/PasswordInput";
 
 export const Route = createFileRoute("/(auth)/_auth/login")({
   component: RouteComponent,
@@ -36,7 +37,7 @@ function RouteComponent() {
   };
 
   return (
-    <Card className="flex flex-col items-stretch justify-center p-8 gap-4 w-full h-full sm:max-w-[25rem] sm:h-fit">
+    <Card className="flex flex-col items-stretch justify-center p-8 gap-4 w-full h-full sm:max-w-[25rem] sm:h-fit z-10">
       <div className="flex flex-col gap-1">
         <h3 className="text-[1.3rem] font-semibold tracking-tight text-balance">
           Login to your account
@@ -69,7 +70,10 @@ function RouteComponent() {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="Password" {...field}></Input>
+                  <PasswordInput
+                    placeholder="Password"
+                    {...field}
+                  ></PasswordInput>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -79,7 +83,7 @@ function RouteComponent() {
         </form>
       </Form>
       <div className="text-xs text-center">
-        <span className="text-muted-foreground">Don't have an account?</span>
+        <span className="text-muted-foreground">Don't have an account?</span>{" "}
         <Link to="/register" className="hover:underline">
           Sign In
         </Link>
