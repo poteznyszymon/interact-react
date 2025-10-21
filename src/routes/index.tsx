@@ -1,6 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
+  beforeLoad: async () => {
+    const response = await fetch("/api/auth/current");
+
+    if (response.status === 401) {
+      throw redirect({ to: "/login" });
+    }
+  },
+  //pendingComponent: () => <div>loading</div>,
   component: App,
 });
 

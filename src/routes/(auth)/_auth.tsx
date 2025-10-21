@@ -1,10 +1,17 @@
 import { useTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { Moon, Sun } from "lucide-react";
 import "./auth.css";
 
 export const Route = createFileRoute("/(auth)/_auth")({
+  beforeLoad: async () => {
+    const response = await fetch("/api/auth/current");
+
+    if (response.status !== 401) {
+      throw redirect({ to: "/" });
+    }
+  },
   component: RouteComponent,
 });
 

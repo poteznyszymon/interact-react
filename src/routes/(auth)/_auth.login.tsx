@@ -85,7 +85,7 @@ function RouteComponent() {
       <div className="text-xs text-center">
         <span className="text-muted-foreground">Don't have an account?</span>{" "}
         <Link to="/register" className="hover:underline">
-          Sign In
+          Sign Up
         </Link>
       </div>
     </Card>
