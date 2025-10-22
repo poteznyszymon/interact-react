@@ -4,6 +4,18 @@ main {
   background-size: 21px 21px;
 }
 
+.register-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 380px) {
+  .register-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 640px) {
   main::before,
   main::after {

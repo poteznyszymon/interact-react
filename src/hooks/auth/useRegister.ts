@@ -1,14 +1,14 @@
-import type { LoginCredentials } from "@/types/auth";
+import type { RegisterCredentials } from "@/types/auth";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 
-const useLogin = () => {
+const useRegister = () => {
   const navigate = useNavigate();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (credentials: LoginCredentials) => {
-      const response = await fetch("/api/auth/login", {
+    mutationFn: async (credentials: RegisterCredentials) => {
+      const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(credentials),
@@ -20,9 +20,10 @@ const useLogin = () => {
         throw new Error(message);
       }
 
-      return true;
+      return response.json();
     },
     onSuccess: () => {
+      toast.success("User created successfully");
       navigate({ to: "/" });
     },
     onError: (error: any) => {
@@ -33,4 +34,4 @@ const useLogin = () => {
   return { mutate, isPending };
 };
 
-export default useLogin;
+export default useRegister;

@@ -15,16 +15,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import LoadingButton from "@/components/LoadingButton";
-import { useState } from "react";
 import SocialAuthButton from "@/components/SocialAuthButton";
 import PasswordInput from "@/components/PasswordInput";
+import useLogin from "@/hooks/auth/useLogin";
 
 export const Route = createFileRoute("/(auth)/_auth/login")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const [isLoading, setIsLoading] = useState(false);
+  const { mutate, isPending } = useLogin();
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -32,8 +32,7 @@ function RouteComponent() {
   });
 
   const onSubmit = (values: z.infer<typeof loginSchema>) => {
-    console.log(values);
-    setIsLoading(true);
+    mutate(values);
   };
 
   return (
@@ -79,7 +78,7 @@ function RouteComponent() {
               </FormItem>
             )}
           />
-          <LoadingButton loading={isLoading}>Login</LoadingButton>
+          <LoadingButton loading={isPending}>Login</LoadingButton>
         </form>
       </Form>
       <div className="text-xs text-center">

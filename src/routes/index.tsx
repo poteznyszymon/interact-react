@@ -1,4 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
+import useLogout from "@/hooks/auth/useLogout";
 
 export const Route = createFileRoute("/")({
   beforeLoad: async () => {
@@ -13,9 +15,15 @@ export const Route = createFileRoute("/")({
 });
 
 function App() {
+  const { mutate, isPending } = useLogout();
+
   return (
     <div className="h-screen flex items-center justify-center">
-      <h1 className="text-2xl font-semibold">Home</h1>
+      <h1 className="text-2xl font-semibold">
+        <Button onClick={() => mutate()} disabled={isPending}>
+          Logout
+        </Button>
+      </h1>
     </div>
   );
 }
