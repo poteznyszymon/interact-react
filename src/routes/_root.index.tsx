@@ -1,22 +1,14 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, useRouteContext } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import useLogout from "@/hooks/auth/useLogout";
 import { useTheme } from "@/components/theme-provider";
 
 export const Route = createFileRoute("/_root/")({
-  beforeLoad: async () => {
-    const response = await fetch("/api/auth/current");
-
-    if (response.status === 401) {
-      throw redirect({ to: "/login" });
-    }
-  },
-  //pendingComponent: () => <div>loading</div>,
   component: App,
 });
 
 function App() {
-  const { mutate, isPending } = useLogout();
+  const { mutate } = useLogout();
   const { theme, setTheme } = useTheme();
 
   return (
