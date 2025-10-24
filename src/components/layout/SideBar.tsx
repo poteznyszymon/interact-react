@@ -44,7 +44,7 @@ const SideBar = ({ user, isOpen, setIsOpen }: SideBarProps) => {
                   className="w-full flex items-center justify-between p-[0.1rem]"
                   variant={"ghost"}
                 >
-                  <div>{user.username}'s Interact</div>
+                  <div>{user.username}'s Interact app</div>
                   <Tooltip delayDuration={200}>
                     <TooltipTrigger asChild>
                       <Button
