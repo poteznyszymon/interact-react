@@ -23,10 +23,10 @@ function RouteComponent() {
   const { user } = Route.useLoaderData();
 
   return (
-    <main className="h-screen flex">
+    <main className="test flex h-screen">
       <SideBar user={user} isOpen={isOpen} setIsOpen={setIsOpen} />
       <div
-        className={`w-full transition-[margin] duration-300  ${isOpen ? "ml-[18rem]" : "ml-0"}`}
+        className={`w-full transition-[margin] duration-300 ${isOpen ? "ml-[18rem]" : "ml-0"}`}
       >
         <Outlet />
       </div>

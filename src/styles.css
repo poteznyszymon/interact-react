@@ -149,3 +149,12 @@ code {
     @apply bg-background text-foreground;
   }
 }
+
+body:has(.open-sidebar-button:hover) .menu {
+  translate: 0;
+}
+
+
+body:has(.open-sidebar-wrapper:hover) .menu {
+  translate: 0;
+}
