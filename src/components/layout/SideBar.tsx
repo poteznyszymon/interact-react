@@ -12,6 +12,7 @@ import type { User } from "@/types/user";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Separator } from "../ui/separator";
 import useLogout from "@/hooks/auth/useLogout";
+import { TreeView, type TreeDataItem } from "../tree-view";
 
 interface SideBarProps {
   user: User;
@@ -41,10 +42,43 @@ const SideBar = ({ user, isOpen, setIsOpen }: SideBarProps) => {
     };
   });
 
+  const data: TreeDataItem[] = [
+    {
+      id: "1",
+      name: "Item 1",
+      children: [
+        {
+          id: "2",
+          name: "Item 1.1",
+          children: [
+            {
+              id: "3",
+              name: "Item 1.1.1",
+            },
+            {
+              id: "4",
+              name: "Item 1.1.2",
+            },
+          ],
+        },
+        {
+          id: "5",
+          name: "Item 1.2 (disabled)",
+          disabled: true,
+        },
+      ],
+    },
+    {
+      id: "6",
+      name: "Item 2 (draggable)",
+      draggable: true,
+    },
+  ];
+
   return (
     <>
       <div
-        className={`menu group bg-muted ease absolute z-10 w-screen border-t-2 border-r-2 p-2 transition-[translate,margin] duration-300 sm:max-w-[18rem] ${isOpen ? "bt-0 h-screen" : "top mt-12 h-[calc(100%-3rem)] -translate-x-[100%] hover:translate-0"}`}
+        className={`menu group bg-muted ease absolute z-10 w-screen border-t-2 border-r-2 border-b-2 p-2 transition-[translate,margin,height] duration-300 sm:max-w-[18rem] ${isOpen ? "h-screen border-t-0" : "top mt-12 mb-12 h-[calc(100%-6rem)] -translate-x-[100%] border-t-2 hover:translate-0"} `}
       >
         <Popover>
           <PopoverTrigger className="w-full" asChild>
@@ -67,23 +101,25 @@ const SideBar = ({ user, isOpen, setIsOpen }: SideBarProps) => {
                   <ChevronDown />
                 </Button>
               </div>
-              <Tooltip delayDuration={200}>
-                <TooltipTrigger asChild>
-                  <Button
-                    onClick={handleClick}
-                    variant={"ghost"}
-                    size={"icon-sm"}
-                  >
-                    <ChevronsLeft />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <div>
-                    <p>Close sidebar</p>
-                    <p className="text-muted-foreground">Ctrl+\</p>
-                  </div>
-                </TooltipContent>
-              </Tooltip>
+              {isOpen && (
+                <Tooltip delayDuration={200}>
+                  <TooltipTrigger asChild>
+                    <Button
+                      onClick={handleClick}
+                      variant={"ghost"}
+                      size={"icon-sm"}
+                    >
+                      <ChevronsLeft />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <div>
+                      <p>Close sidebar</p>
+                      <p className="text-muted-foreground">Ctrl+\</p>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              )}
             </div>
           </PopoverTrigger>
           <PopoverContent className="bg-red ml-[0.1rem] w-[17rem] p-0">
@@ -128,13 +164,14 @@ const SideBar = ({ user, isOpen, setIsOpen }: SideBarProps) => {
             </div>
           </PopoverContent>
         </Popover>
+        <TreeView data={data} />
       </div>
       {!isOpen && (
         // <Tooltip delayDuration={200}>
         //   <TooltipTrigger asChild>
         <div
-          className="open-sidebar-wrapper fixed top-0 left-0 w-[15rem] p-2"
-          style={{ clipPath: "clip-path: polygon(0 1%, 0% 100%, 100% 100%)" }}
+          className="open-sidebar-wrapper fixed top-0 left-0 w-[17rem] p-2"
+          style={{ clipPath: "polygon(0 0, 0% 100%, 100% 100%)" }}
         >
           <Button
             onClick={handleClick}

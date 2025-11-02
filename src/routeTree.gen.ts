@@ -14,8 +14,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as RootRouteImport } from './routes/_root'
 import { Route as RootIndexRouteImport } from './routes/_root.index'
 import { Route as authAuthRouteImport } from './routes/(auth)/_auth'
+import { Route as authAuthVerifyOtpRouteImport } from './routes/(auth)/_auth.verify-otp'
 import { Route as authAuthRegisterRouteImport } from './routes/(auth)/_auth.register'
 import { Route as authAuthLoginRouteImport } from './routes/(auth)/_auth.login'
+import { Route as authAuthForgotPasswordRouteImport } from './routes/(auth)/_auth.forgot-password'
 
 const authRouteImport = createFileRoute('/(auth)')()
 
@@ -36,6 +38,11 @@ const authAuthRoute = authAuthRouteImport.update({
   id: '/_auth',
   getParentRoute: () => authRoute,
 } as any)
+const authAuthVerifyOtpRoute = authAuthVerifyOtpRouteImport.update({
+  id: '/verify-otp',
+  path: '/verify-otp',
+  getParentRoute: () => authAuthRoute,
+} as any)
 const authAuthRegisterRoute = authAuthRegisterRouteImport.update({
   id: '/register',
   path: '/register',
@@ -46,16 +53,25 @@ const authAuthLoginRoute = authAuthLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => authAuthRoute,
 } as any)
+const authAuthForgotPasswordRoute = authAuthForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => authAuthRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof RootIndexRoute
+  '/forgot-password': typeof authAuthForgotPasswordRoute
   '/login': typeof authAuthLoginRoute
   '/register': typeof authAuthRegisterRoute
+  '/verify-otp': typeof authAuthVerifyOtpRoute
 }
 export interface FileRoutesByTo {
   '/': typeof RootIndexRoute
+  '/forgot-password': typeof authAuthForgotPasswordRoute
   '/login': typeof authAuthLoginRoute
   '/register': typeof authAuthRegisterRoute
+  '/verify-otp': typeof authAuthVerifyOtpRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -63,22 +79,26 @@ export interface FileRoutesById {
   '/(auth)': typeof authRouteWithChildren
   '/(auth)/_auth': typeof authAuthRouteWithChildren
   '/_root/': typeof RootIndexRoute
+  '/(auth)/_auth/forgot-password': typeof authAuthForgotPasswordRoute
   '/(auth)/_auth/login': typeof authAuthLoginRoute
   '/(auth)/_auth/register': typeof authAuthRegisterRoute
+  '/(auth)/_auth/verify-otp': typeof authAuthVerifyOtpRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/register'
+  fullPaths: '/' | '/forgot-password' | '/login' | '/register' | '/verify-otp'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/register'
+  to: '/' | '/forgot-password' | '/login' | '/register' | '/verify-otp'
   id:
     | '__root__'
     | '/_root'
     | '/(auth)'
     | '/(auth)/_auth'
     | '/_root/'
+    | '/(auth)/_auth/forgot-password'
     | '/(auth)/_auth/login'
     | '/(auth)/_auth/register'
+    | '/(auth)/_auth/verify-otp'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -116,6 +136,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authAuthRouteImport
       parentRoute: typeof authRoute
     }
+    '/(auth)/_auth/verify-otp': {
+      id: '/(auth)/_auth/verify-otp'
+      path: '/verify-otp'
+      fullPath: '/verify-otp'
+      preLoaderRoute: typeof authAuthVerifyOtpRouteImport
+      parentRoute: typeof authAuthRoute
+    }
     '/(auth)/_auth/register': {
       id: '/(auth)/_auth/register'
       path: '/register'
@@ -128,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof authAuthLoginRouteImport
+      parentRoute: typeof authAuthRoute
+    }
+    '/(auth)/_auth/forgot-password': {
+      id: '/(auth)/_auth/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof authAuthForgotPasswordRouteImport
       parentRoute: typeof authAuthRoute
     }
   }
@@ -144,13 +178,17 @@ const RootRouteChildren: RootRouteChildren = {
 const RootRouteWithChildren = RootRoute._addFileChildren(RootRouteChildren)
 
 interface authAuthRouteChildren {
+  authAuthForgotPasswordRoute: typeof authAuthForgotPasswordRoute
   authAuthLoginRoute: typeof authAuthLoginRoute
   authAuthRegisterRoute: typeof authAuthRegisterRoute
+  authAuthVerifyOtpRoute: typeof authAuthVerifyOtpRoute
 }
 
 const authAuthRouteChildren: authAuthRouteChildren = {
+  authAuthForgotPasswordRoute: authAuthForgotPasswordRoute,
   authAuthLoginRoute: authAuthLoginRoute,
   authAuthRegisterRoute: authAuthRegisterRoute,
+  authAuthVerifyOtpRoute: authAuthVerifyOtpRoute,
 }
 
 const authAuthRouteWithChildren = authAuthRoute._addFileChildren(

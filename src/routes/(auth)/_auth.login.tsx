@@ -36,12 +36,12 @@ function RouteComponent() {
   };
 
   return (
-    <Card className="flex flex-col items-stretch justify-center p-8 gap-4 w-full h-full sm:max-w-[25rem] sm:h-fit z-10">
+    <Card className="z-10 flex h-full w-full flex-col items-stretch justify-center gap-4 p-8 sm:h-fit sm:max-w-[26rem]">
       <div className="flex flex-col gap-1">
         <h3 className="text-[1.3rem] font-semibold tracking-tight text-balance">
           Login to your account
         </h3>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-muted-foreground text-xs">
           Enter your email below to login to your account
         </p>
       </div>
@@ -78,10 +78,15 @@ function RouteComponent() {
               </FormItem>
             )}
           />
+          <div className="-mt-1 mb-[10px] flex items-center justify-end">
+            <Link to={"/forgot-password"} className="text-xs hover:underline">
+              Forgot password
+            </Link>
+          </div>
           <LoadingButton loading={isPending}>Login</LoadingButton>
         </form>
       </Form>
-      <div className="text-xs text-center">
+      <div className="text-center text-xs">
         <span className="text-muted-foreground">Don't have an account?</span>{" "}
         <Link to="/register" className="hover:underline">
           Sign Up

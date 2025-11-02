@@ -7,11 +7,14 @@ import { routeTree } from "./routeTree.gen";
 
 import "./styles.css";
 import reportWebVitals from "./reportWebVitals.ts";
+import { string } from "zod";
 
 // Create a new router instance
 const router = createRouter({
   routeTree,
-  context: {},
+  context: {
+    email: string,
+  },
   defaultPreload: "intent",
   scrollRestoration: true,
   defaultStructuralSharing: true,
@@ -32,7 +35,7 @@ if (rootElement && !rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <RouterProvider router={router} />
-    </StrictMode>
+    </StrictMode>,
   );
 }
 
