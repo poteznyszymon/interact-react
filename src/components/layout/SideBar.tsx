@@ -78,7 +78,7 @@ const SideBar = ({ user, isOpen, setIsOpen }: SideBarProps) => {
   return (
     <>
       <div
-        className={`menu group bg-muted ease absolute z-10 w-screen border-t-2 border-r-2 border-b-2 p-2 transition-[translate,margin,height] duration-300 sm:max-w-[18rem] ${isOpen ? "h-screen border-t-0" : "top mt-12 mb-12 h-[calc(100%-6rem)] -translate-x-[100%] border-t-2 hover:translate-0"} `}
+        className={`menu group bg-muted ease absolute z-10 w-screen border-t-2 border-r-2 border-b-2 p-2 shadow-xs transition-[translate,margin,height] duration-300 sm:max-w-[18rem] ${isOpen ? "h-screen rounded-r-none border-t-0" : "top mt-12 mb-12 h-[calc(100%-6rem)] -translate-x-[100%] rounded-r-xl border-t-2 hover:translate-0"} `}
       >
         <Popover>
           <PopoverTrigger className="w-full" asChild>
@@ -112,7 +112,7 @@ const SideBar = ({ user, isOpen, setIsOpen }: SideBarProps) => {
                       <ChevronsLeft />
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>
+                  <TooltipContent side="right">
                     <div>
                       <p>Close sidebar</p>
                       <p className="text-muted-foreground">Ctrl+\</p>
@@ -167,29 +167,29 @@ const SideBar = ({ user, isOpen, setIsOpen }: SideBarProps) => {
         <TreeView data={data} />
       </div>
       {!isOpen && (
-        // <Tooltip delayDuration={200}>
-        //   <TooltipTrigger asChild>
         <div
           className="open-sidebar-wrapper fixed top-0 left-0 w-[17rem] p-2"
           style={{ clipPath: "polygon(0 0, 0% 100%, 100% 100%)" }}
         >
-          <Button
-            onClick={handleClick}
-            className="open-sidebar-button"
-            variant={"ghost"}
-            size={"icon-sm"}
-          >
-            <ChevronsRight />
-          </Button>
+          <Tooltip delayDuration={200}>
+            <TooltipTrigger asChild>
+              <Button
+                onClick={handleClick}
+                className="open-sidebar-button"
+                variant={"ghost"}
+                size={"icon-sm"}
+              >
+                <ChevronsRight />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent className="open-sidebar-wrapper" side="right">
+              <div>
+                <p>Lock sidebar</p>
+                <p className="text-muted-foreground">Ctrl+\</p>
+              </div>
+            </TooltipContent>
+          </Tooltip>
         </div>
-        //   </TooltipTrigger>
-        //   <TooltipContent className="ml-1">
-        //     <div>
-        //       <p>Open sidebar</p>
-        //       <p className="text-muted-foreground">Ctrl+\</p>
-        //     </div>
-        //   </TooltipContent>
-        // </Tooltip>
       )}
     </>
   );
