@@ -1,8 +1,5 @@
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import "./index.css";
-import SideBar from "@/components/layout/SideBar";
-import { useState } from "react";
-import type { User } from "@/types/user";
 import InDevelopment from "@/components/InDevelopment";
 
 export const Route = createFileRoute("/_root")({
@@ -20,7 +17,6 @@ export const Route = createFileRoute("/_root")({
 });
 
 function RouteComponent() {
-  const [isOpen, setIsOpen] = useState(true);
   // const { user } = Route.useLoaderData();
 
   return (

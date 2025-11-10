@@ -1,4 +1,4 @@
-import { createFileRoute, useRouteContext } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import useLogout from "@/hooks/auth/useLogout";
 import { useTheme } from "@/components/theme-provider";
@@ -12,7 +12,7 @@ function App() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="h-screen w-full flex items-center justify-center gap-4">
+    <div className="flex h-screen w-full items-center justify-center gap-4">
       <Button variant={"ghost"} size={"sm"} onClick={() => mutate()}>
         logout
       </Button>
